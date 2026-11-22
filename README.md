@@ -2,7 +2,7 @@
 
 Os exercícios que fiz quando estava aprendendo eletrônica e Arduino. Foi daqui que saiu a base para o SIF, o sistema de irrigação que depois foi premiado na Ficiências.
 
-Cada pasta é um passo, do LED piscando até organizar o código em classes de C++. Os circuitos foram montados no Tinkercad.
+Cada pasta é um passo: do LED piscando até classes em C++ e, depois, o ESP32 com Wi-Fi. Os circuitos foram montados no Tinkercad.
 
 Um tempo depois voltei aqui para uma revisão: o código continua o que eu escrevi na época, só corrigi o que não funcionava (a lista está no fim).
 
@@ -17,6 +17,16 @@ Um tempo depois voltei aqui para uma revisão: o código continua o que eu escre
 | [`07_luz_rgb`](07_luz_rgb) | LED RGB trocando de cor pelo botão |
 | [`08_classes_rgb`](08_classes_rgb) | o mesmo LED RGB, agora organizado em classes |
 | [`09_entrada_analogica_serial`](09_entrada_analogica_serial) | leitura de um potenciômetro enviada pela serial |
+
+Depois disso passei para o ESP32, que já vem com Wi-Fi. Foi nessa fase que o projeto de irrigação começou a tomar forma:
+
+| Pasta | O que treina |
+|---|---|
+| [`10_rele`](10_rele) | relé ligando e desligando uma bomba d'água a cada 10 segundos |
+| [`11_umidade_liga_bomba`](11_umidade_liga_bomba) | sensor de umidade do solo decidindo quando ligar a bomba |
+| [`12_wifi_servidor`](12_wifi_servidor) | conectar no Wi-Fi e responder numa rota HTTP |
+| [`13_relogio_ntp`](13_relogio_ntp) | relógio: busca a hora certa na internet (NTP) e mostra data, hora e dia da semana |
+| [`14_semaforo_cruzamento`](14_semaforo_cruzamento) | de volta ao Arduino: cruzamento com dois semáforos e sinal de pedestre que pisca antes de fechar |
 
 ## Os circuitos
 
@@ -42,9 +52,17 @@ Um tempo depois voltei aqui para uma revisão: o código continua o que eu escre
 ### 09 · Entrada analógica pela serial
 ![Entrada analógica](09_entrada_analogica_serial/circuito.png)
 
+### 14 · Semáforo de cruzamento
+![Semáforo de cruzamento](14_semaforo_cruzamento/circuito.png)
+
 ## Como usar
 
 Abra o `.ino` de qualquer pasta na Arduino IDE e envie para a placa. Ou monte o circuito no Tinkercad e cole o código lá.
+
+Do `10` ao `13` a placa é um ESP32. Para os de Wi-Fi (`12` e `13`), troque `NOME_DA_REDE` e `SENHA_DA_REDE` pelos dados da sua rede. As bibliotecas usadas são instaladas pelo gerenciador da IDE:
+
+- `12`: ESPAsyncWebServer
+- `13`: NTPClient, Time e Timezone
 
 ## O que foi corrigido na revisão
 
@@ -52,3 +70,6 @@ Abra o `.ino` de qualquer pasta na Arduino IDE e envie para a placa. Ou monte o 
 - **03:** o amarelo e o verde acendiam o LED trocado. Agora o código usa os nomes de cada cor (`led_Vermelho`, `led_Amarelo`, `led_Verde`) e a ordem é vermelho, verde, amarelo.
 - **04:** o segundo `for` nunca rodava (`i < min` com `i--`), então o LED só acendia e não apagava. E o máximo era 16, quando o PWM vai até 255.
 - **05:** na época o nome da pasta era "botao on off que nao fungaaaa". O motivo: eu usei `==`, que compara, no lugar de `=`, que atribui. As variáveis do botão nunca mudavam.
+- **11:** a variável `reléPin` tinha acento, o que alguns compiladores não aceitam. Virou `relePin`.
+- **13:** o fuso horário estava configurado para a Europa (UTC+1 com horário de verão). Agora é o horário de Brasília (UTC-3).
+- **14:** o sinal de pedestre de uma das ruas nunca ficava vermelho: depois de piscar, ele apagava de vez.
