@@ -4,7 +4,7 @@ Os exercícios que fiz quando estava aprendendo eletrônica e Arduino. Foi daqui
 
 Cada pasta é um passo: do LED piscando até classes em C++ e, depois, o ESP32 com Wi-Fi. Os circuitos foram montados no Tinkercad.
 
-Um tempo depois voltei aqui para uma revisão: o código continua o que eu escrevi na época, só corrigi o que não funcionava (a lista está no fim).
+Um tempo depois voltei aqui para uma revisão: o código continua o que eu escrevi na época, só corrigi o que não funcionava.
 
 | Pasta | O que treina |
 |---|---|
@@ -63,13 +63,3 @@ Do `10` ao `13` a placa é um ESP32. Para os de Wi-Fi (`12` e `13`), troque `NOM
 
 - `12`: ESPAsyncWebServer
 - `13`: NTPClient, Time e Timezone
-
-## O que foi corrigido na revisão
-
-- **01:** estava escrito `daley` no lugar de `delay`, então nem compilava.
-- **03:** o amarelo e o verde acendiam o LED trocado. Agora o código usa os nomes de cada cor (`led_Vermelho`, `led_Amarelo`, `led_Verde`) e a ordem é vermelho, verde, amarelo.
-- **04:** o segundo `for` nunca rodava (`i < min` com `i--`), então o LED só acendia e não apagava. E o máximo era 16, quando o PWM vai até 255.
-- **05:** na época o nome da pasta era "botao on off que nao fungaaaa". O motivo: eu usei `==`, que compara, no lugar de `=`, que atribui. As variáveis do botão nunca mudavam.
-- **11:** a variável `reléPin` tinha acento, o que alguns compiladores não aceitam. Virou `relePin`.
-- **13:** o fuso horário estava configurado para a Europa (UTC+1 com horário de verão). Agora é o horário de Brasília (UTC-3).
-- **14:** o sinal de pedestre de uma das ruas nunca ficava vermelho: depois de piscar, ele apagava de vez.
