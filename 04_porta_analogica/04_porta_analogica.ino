@@ -1,7 +1,7 @@
 #define led 3
-#define max 16
+#define max 255
 #define min 0
-#define tmp 100
+#define tmp 5
 
 void setup() {
     pinMode(led,OUTPUT);
@@ -13,7 +13,7 @@ void loop() {
     // digitalWrite(led, HIGH);
     delay(tmp);
     }
-    for(int i= max; i< min; i--){
+    for(int i= max; i> min; i--){
      analogWrite(led,i);
     // digitalWrite(led, LOW);
     delay(tmp);

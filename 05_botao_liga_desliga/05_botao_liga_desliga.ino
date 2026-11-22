@@ -13,8 +13,8 @@ void trocaLed(){
 
 void keyup(){
   if((btnclicado == 1)and(btnliberado == 1 )){
-    btnclicado == 0;
-    btnliberado == 0; 
+    btnclicado = 0;
+    btnliberado = 0; 
     trocaLed();
   }
 }
@@ -26,10 +26,10 @@ void setup(){
 
 void loop() {
       if(digitalRead(btn) == HIGH ){
-      btnclicado == 1;
-      btnliberado == 0;
+      btnclicado = 1;
+      btnliberado = 0;
     }else{
-      btnliberado == 1;
+      btnliberado = 1;
   }
   keyup();
 }
